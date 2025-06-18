@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'dhruvrs/dockapp'
-        DOCKER_CREDENTIALS = 'dockerhub-credentials'  // must match Jenkins credentials ID
+        DOCKER_CREDENTIALS = 'dockerhub-cred'  // must match Jenkins credentials ID
     }
 
     stages {
