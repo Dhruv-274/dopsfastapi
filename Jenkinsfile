@@ -4,7 +4,8 @@ pipeline{
         dockerCred=credentials('dockerhub-credentials')
         dockerImg="dhruvrs/baseapp:latest"
     }
-    stage('git'){
+    stages{
+        stage('git'){
         steps{
             git (
                 url:'https://github.com/Dhruv-274/dopsfastapi.git',
@@ -13,21 +14,22 @@ pipeline{
             )
         }
     }
-    stage('build'){
-        steps{
-            script{
-                docker.build(dockerImg)
-            }
+        stage('build'){
+            steps{
+                script{
+                    docker.build(dockerImg)
+                }
 
-        }
-    }
-    stage('push'){
-        steps{
-           script{
-             docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials'){
-                docker.image('dockerImg').push('latest')
             }
-           }
+        }
+        stage('push'){
+            steps{
+                script{
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials'){
+                        docker.image('dockerImg').push('latest')
+                    }
+                }
+            }
         }
     }
 }
