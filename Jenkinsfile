@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        dockerCred = credentials('dockerhub-credentials')
+        dockerCred = credentials('dockerhub-cred')
         dockerImg = "dhruvrs/dockapp"
     }
     stages {
