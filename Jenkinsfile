@@ -1,31 +1,33 @@
 pipeline {
     agent any
+
     environment {
-        dockerCred = credentials('dockerhub-cred')
-        dockerImg = "dhruvrs/dockapp:latest"
+        DOCKER_IMAGE = 'dhruvrs/dockapp'
+        DOCKER_CREDENTIALS = 'dockerhub-credentials'  // must match Jenkins credentials ID
     }
+
     stages {
-        stage('Clone Repo') {
+        stage('Checkout') {
             steps {
-                git(
+                git branch: 'main',
                     url: 'https://github.com/Dhruv-274/dopsfastapi.git',
-                    credentialsId: 'github-credentials',
-                    branch: 'main'
-                )
+                    credentialsId: 'github-credentials'
             }
         }
-        stage('Build Image') {
+
+        stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build(dockerImg)
+                    docker.build(DOCKER_IMAGE)
                 }
             }
         }
-        stage('Push to Docker Hub') {
+
+        stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', dockerCred) {
-                        docker.image(dockerImg).push()
+                    docker.withRegistry('https://registry.hub.docker.com', DOCKER_CREDENTIALS) {
+                        docker.image(DOCKER_IMAGE).push('latest')
                     }
                 }
             }
