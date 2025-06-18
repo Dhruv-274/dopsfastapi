@@ -8,7 +8,7 @@ pipeline{
         steps{
             git (
                 url:'https://github.com/Dhruv-274/dopsfastapi.git'
-                credentials:'github-credentials'
+                credentialsId:'github-credentials'
                 branch:'main'
             )
         }
