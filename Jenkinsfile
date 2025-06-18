@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', dockerCred) {
-                        docker.image(dockerImg).push('latest')
+                        docker.image(dockerImg).push()
                     }
                 }
             }
