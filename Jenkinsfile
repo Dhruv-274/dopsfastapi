@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         dockerCred = credentials('dockerhub-cred')
-        dockerImg = "dhruvrs/dockapp"
+        dockerImg = "dhruvrs/dockapp:latest"
     }
     stages {
         stage('Clone Repo') {
