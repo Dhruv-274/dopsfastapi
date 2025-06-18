@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment{
         dockerCred=credentials('dockerhub-credentials')
-        dockerImg="dhruvrs/baseapp:latest"
+        dockerImg="dhruvrs/baseapp"
     }
     stages{
         stage('git'){
